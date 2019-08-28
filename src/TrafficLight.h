@@ -40,7 +40,7 @@ public:
     enum TrafficLightPhase{red, green};
 
     // getters / setters
-    TrafficLightPhase GetCurrentPhase(){return _currentPhase};
+    TrafficLightPhase TrafficLight::GetCurrentPhase();
 
     // typical behaviour methods
 
@@ -51,7 +51,7 @@ public:
 private:
     // typical behaviour methods
 
-    TrafficLight::TrafficLightPhase _currentPhase;
+    TrafficLightPhase _currentPhase;
    
     void CycleThroughPhases();
 

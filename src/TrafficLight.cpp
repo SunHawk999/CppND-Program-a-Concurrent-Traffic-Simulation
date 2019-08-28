@@ -3,8 +3,7 @@
 #include "TrafficLight.h"
 
 /* Implementation of class "MessageQueue" */
-
-/* 
+/*
 template <typename T>
 T MessageQueue<T>::receive()
 {
@@ -22,32 +21,32 @@ void MessageQueue<T>::send(T &&msg)
 */
 
 /* Implementation of class "TrafficLight" */
-
-/* 
+ 
 TrafficLight::TrafficLight()
 {
     _currentPhase = TrafficLightPhase::red;
 }
 
-void TrafficLight::waitForGreen()
+void TrafficLight::WaitForGreen()
 {
     // FP.5b : add the implementation of the method waitForGreen, in which an infinite while-loop 
     // runs and repeatedly calls the receive function on the message queue. 
     // Once it receives TrafficLightPhase::green, the method returns.
 }
 
-TrafficLightPhase TrafficLight::getCurrentPhase()
+TrafficLight::TrafficLightPhase TrafficLight::GetCurrentPhase()
 {
     return _currentPhase;
 }
 
-void TrafficLight::simulate()
+void TrafficLight::Simulate()
 {
     // FP.2b : Finally, the private method „cycleThroughPhases“ should be started in a thread when the public method „simulate“ is called. To do this, use the thread queue in the base class. 
 }
 
+
 // virtual function which is executed in a thread
-void TrafficLight::cycleThroughPhases()
+void TrafficLight::CycleThroughPhases()
 {
     // FP.2a : Implement the function with an infinite loop that measures the time between two loop cycles 
     // and toggles the current phase of the traffic light between red and green and sends an update method 
@@ -55,4 +54,3 @@ void TrafficLight::cycleThroughPhases()
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
 }
 
-*/
