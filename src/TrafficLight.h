@@ -40,7 +40,7 @@ public:
     enum TrafficLightPhase{red, green};
 
     // getters / setters
-    TrafficLightPhase TrafficLight::GetCurrentPhase();
+    TrafficLightPhase GetCurrentPhase();
 
     // typical behaviour methods
 

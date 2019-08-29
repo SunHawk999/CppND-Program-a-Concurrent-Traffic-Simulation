@@ -52,5 +52,23 @@ void TrafficLight::CycleThroughPhases()
     // and toggles the current phase of the traffic light between red and green and sends an update method 
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
+    
+    //Measure time between two loop cycles, How to measure time between two calls of the function/loop?
+
+    //Infinite loop
+    while(true){
+
+        //Toggle the current phase of the traffic light, if else statements the way to go?
+        if(TrafficLight::_currentPhase == TrafficLightPhase::red)
+            TrafficLight::_currentPhase = TrafficLightPhase::green;
+        
+        else if(TrafficLight::_currentPhase == TrafficLightPhase::green)
+            TrafficLight::_currentPhase = TrafficLightPhase::red;
+
+        //send an update method to the message queue using move semantics
+        
+        //Sleep for 1 minute
+        std::this_thread::sleep_for(std::chrono::minutes(1));
+    }
 }
 
