@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <thread>
 #include "TrafficLight.h"
 
 /* Implementation of class "MessageQueue" */
@@ -53,10 +54,18 @@ void TrafficLight::CycleThroughPhases()
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
     
-    //Measure time between two loop cycles, How to measure time between two calls of the function/loop?
-
+    std::chrono::time_point<std::chrono::system_clock> lastUpdate;
+    //init stop watch
+    lastUpdate = std::chrono::system_clock::now();
+    
     //Infinite loop
     while(true){
+        
+        //Compute time difference to stop watch
+        long timeSinceLastUpdate = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - lastUpdate).count();
+        
+        //Sleep for 4 to 6 seconds using rand()
+        std::this_thread::sleep_for(std::chrono::seconds(rand() % 4 + 2));
 
         //Toggle the current phase of the traffic light, if else statements the way to go?
         if(TrafficLight::_currentPhase == TrafficLightPhase::red)
@@ -65,10 +74,15 @@ void TrafficLight::CycleThroughPhases()
         else if(TrafficLight::_currentPhase == TrafficLightPhase::green)
             TrafficLight::_currentPhase = TrafficLightPhase::red;
 
-        //send an update method to the message queue using move semantics
+        //send an update method to the message queue using move semantics, new light, and timeSinceLastUpdate
+        //Look at promises and futures section for pointers
+            //Message queue in Intersection::addVehicleToQueue
         
-        //Sleep for 1 minute
-        std::this_thread::sleep_for(std::chrono::minutes(1));
+        //Sleep for 1 millisecond
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
+
+    //reset stop watch
+    lastUpdate = std::chrono::system_clock::now();
 }
 
