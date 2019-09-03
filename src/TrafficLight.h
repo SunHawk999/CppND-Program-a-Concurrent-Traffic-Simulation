@@ -20,7 +20,17 @@ class MessageQueue
 {
 public:
 
+    std::dequeue<TrafficLightPhase> _queue;    //Stores objects of type TrafficLightPhase
+
+    void send();
+
+    T recieve();
+
+
 private:
+
+    std::condition_variable _var;
+    std::mutex _mtx;
     
 };
 
