@@ -23,7 +23,7 @@ public:
 
     void send(T &&msg);
 
-    T recieve();
+    T receive();
 
 private:
 
@@ -50,14 +50,12 @@ public:
     TrafficLightPhase GetCurrentPhase();
 
     // typical behaviour methods
-
     void WaitForGreen();
 
     void Simulate();
 
 private:
     // typical behaviour methods
-
     TrafficLightPhase _currentPhase;
    
     void CycleThroughPhases();
