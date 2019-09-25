@@ -1,6 +1,5 @@
 #include <iostream>
 #include <random>
-#include <thread>
 #include "TrafficLight.h"
 
 /* Implementation of class "MessageQueue" */
@@ -11,11 +10,16 @@ T MessageQueue<T>::receive()
     // to wait for and receive new messages and pull them from the queue using move semantics. 
     // The received object should then be returned by the receive function. 
     std::unique_lock<std::mutex> uLock(_mtx);
-    TrafficLight::_condition.wait(uLock);
+    _var.wait(uLock);
 
     //Move semantics here
-    std::move(TrafficLight::_currentPhase);
+    T receivedMessage = std::move(_queue.back());
+
+    //Remove last element from _message
+    _queue.pop_back();
+
     //return recieved object here
+    return receivedMessage;
 
 }   
 
@@ -45,8 +49,9 @@ void TrafficLight::WaitForGreen()
     // runs and repeatedly calls the receive function on the message queue. 
     // Once it receives TrafficLightPhase::green, the method returns.
     while(true){
-        MessageQueue<TrafficLightPhase> receive();
-        break;
+        
+        if(_message.receive() == TrafficLightPhase::green)
+            break;
     }
 }
 
