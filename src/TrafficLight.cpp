@@ -87,6 +87,18 @@ void TrafficLight::CycleThroughPhases()
         //Compute time difference to stop watch
         long timeSinceLastUpdate = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - lastUpdate).count();
         
+        //Casting based on found stackoverflow post:
+        //https://stackoverflow.com/questions/31255486/c-how-do-i-convert-a-stdchronotime-point-to-long-and-back
+        
+        auto now_s = std::chrono::time_point_cast<std::chrono::seconds>(lastUpdate);
+        auto epoch = now_s.time_since_epoch();
+        auto value = std::chrono::duration_cast<std::chrono::seconds>(epoch);
+
+        unsigned int duration = value.count();
+        //Base the srand seed on duration of now from epoch, should give a different number each time run
+        // How is that for randomeness?
+        srand(duration);
+
         //Sleep for 4 to 6 seconds using rand(), Right way to implement it?
         std::this_thread::sleep_for(std::chrono::seconds(rand() % 4 + 2));
         
